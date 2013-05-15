@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("ConcurrencyOrnekKey = {ConcurrencyOrnekKey}")]
@@ -20,6 +20,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private string adi;
 		private byte[] versiyonZamani;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid ConcurrencyOrnekKey
 		{
@@ -39,6 +40,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -79,6 +81,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string ConcurrencyOrnekKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -103,6 +106,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string VersiyonZamaniAsString
 		{
 			[DebuggerStepThrough]
@@ -117,12 +121,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string ConcurrencyOrnekKey = "ConcurrencyOrnekKey";
-		public const string Adi = "Adi";
-		public const string VersiyonZamani = "VersiyonZamani";
-	}
 		public ConcurrencyOrnek ShallowCopy()
 		{
 			ConcurrencyOrnek obj = new ConcurrencyOrnek();
@@ -131,61 +129,18 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.versiyonZamani = versiyonZamani;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "VersiyonZamani"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string ConcurrencyOrnekKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".ConcurrencyOrnekKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "ConcurrencyOrnekKey";
-				}
-			}
-		}
-		public static string Adi
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "VersiyonZamani"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
+			public const string ConcurrencyOrnekKey = "ConcurrencyOrnekKey";
+			public const string Adi = "Adi";
+			public const string VersiyonZamani = "VersiyonZamani";
 		}
-		public static string VersiyonZamani
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".VersiyonZamani"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "VersiyonZamani";
-				}
-			}
-		}
+
 	}
-}
 }

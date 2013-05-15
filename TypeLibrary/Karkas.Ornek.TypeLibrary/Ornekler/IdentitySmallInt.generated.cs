@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("IdentitySmallIntKey = {IdentitySmallIntKey}")]
@@ -19,6 +19,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private short identitySmallIntKey;
 		private string adi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public short IdentitySmallIntKey
 		{
@@ -38,6 +39,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -59,6 +61,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string IdentitySmallIntKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -81,11 +84,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string IdentitySmallIntKey = "IdentitySmallIntKey";
-		public const string Adi = "Adi";
-	}
 		public IdentitySmallInt ShallowCopy()
 		{
 			IdentitySmallInt obj = new IdentitySmallInt();
@@ -93,45 +91,16 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.adi = adi;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string IdentitySmallIntKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".IdentitySmallIntKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "IdentitySmallIntKey";
-				}
-			}
-		}
-		public static string Adi
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
+			public const string IdentitySmallIntKey = "IdentitySmallIntKey";
+			public const string Adi = "Adi";
 		}
+
 	}
-}
 }

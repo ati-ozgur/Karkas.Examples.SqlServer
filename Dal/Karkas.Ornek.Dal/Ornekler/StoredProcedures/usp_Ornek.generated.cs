@@ -15,7 +15,7 @@ namespace Karkas.Ornek.Dal.Ornekler
 			, AdoTemplate template
 			)
 			{
-				ParameterBuilder builder = new ParameterBuilder();
+				ParameterBuilder builder = template.getParameterBuilder();
 				
 				 builder.parameterEkle( "@SAYI1",DbType.Int32,@SAYI1);
 				SqlCommand cmd = new SqlCommand();

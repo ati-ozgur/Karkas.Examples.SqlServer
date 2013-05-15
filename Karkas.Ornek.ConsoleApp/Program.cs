@@ -14,7 +14,6 @@ using System.Globalization;
 using Karkas.Ornek.Bs.Ornekler;
 using Karkas.Ornek.ConsoleApp.DataUtilOrnekleri;
 using Karkas.Ornek.Dal.Ornekler;
-using Karkas.Ornek.BsWrapper.Ornekler;
 
 namespace Karkas.Ornek.ConsoleApp
 {
@@ -26,7 +25,7 @@ namespace Karkas.Ornek.ConsoleApp
             a.AciklamaKey = Guid.NewGuid();
             a.AciklamaProperty = "Deneme";
 
-            AciklamaBsWrapper wrapper = new AciklamaBsWrapper();
+            AciklamaBs wrapper = new AciklamaBs();
             wrapper.Ekle(a);
 
 

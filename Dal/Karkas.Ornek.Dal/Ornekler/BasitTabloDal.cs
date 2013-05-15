@@ -22,7 +22,7 @@ namespace Karkas.Ornek.Dal.Ornekler
                          WHERE 
                           BasitTabloKey = @BasitTabloKey
                         ";
-            ParameterBuilder builder = new ParameterBuilder();
+            ParameterBuilder builder = Template.getParameterBuilder();
             builder.parameterEkle("@BasitTabloKey",DbType.Guid,pBasitTabloKey);
             Template.SorguHariciKomutCalistir(sql, builder.GetParameterArray());
         }

@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("OrnekTabloKey = {OrnekTabloKey}")]
@@ -47,6 +47,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private string kolonVarcharMax;
 		private string kolonXml;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid OrnekTabloKey
 		{
@@ -66,6 +67,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<long> KolonBigInt
 		{
@@ -85,6 +87,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte[] KolonBinary
 		{
@@ -104,6 +107,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<bool> KolonBit
 		{
@@ -123,6 +127,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(10)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonChar
 		{
@@ -142,6 +148,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<DateTime> KolonDateTime
 		{
@@ -199,6 +206,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte[] KolonImage
 		{
@@ -256,6 +264,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(10)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonNchar
 		{
@@ -275,6 +285,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonNtext
 		{
@@ -313,6 +324,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonNvarchar
 		{
@@ -332,6 +345,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(-1)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonNvarcharMax
 		{
@@ -370,6 +385,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<DateTime> KolonSmallDateTime
 		{
@@ -389,6 +405,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<short> KolonSmallInt
 		{
@@ -408,6 +425,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<decimal> KolonSmallMoney
 		{
@@ -427,6 +445,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public object KolonSqlVariant
 		{
@@ -446,6 +465,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonText
 		{
@@ -465,6 +485,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte[] KolonTimeStamp
 		{
@@ -503,6 +524,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<Guid> KolonUniqueIdentifier
 		{
@@ -522,6 +544,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte[] KolonVarBinary
 		{
@@ -541,6 +564,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte[] KolonVarBinaryMax
 		{
@@ -560,6 +584,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonVarchar
 		{
@@ -579,6 +605,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(-1)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonVarcharMax
 		{
@@ -598,6 +626,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string KolonXml
 		{
@@ -619,6 +648,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string OrnekTabloKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -643,6 +673,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonBigIntAsString
 		{
 			[DebuggerStepThrough]
@@ -667,6 +698,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonBinaryAsString
 		{
 			[DebuggerStepThrough]
@@ -683,6 +715,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonBitAsString
 		{
 			[DebuggerStepThrough]
@@ -707,6 +740,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonDateTimeAsString
 		{
 			[DebuggerStepThrough]
@@ -731,6 +765,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonDecimalAsString
 		{
 			[DebuggerStepThrough]
@@ -755,6 +790,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonFloatAsString
 		{
 			[DebuggerStepThrough]
@@ -779,6 +815,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonImageAsString
 		{
 			[DebuggerStepThrough]
@@ -795,6 +832,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonIntAsString
 		{
 			[DebuggerStepThrough]
@@ -819,6 +857,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonMoneyAsString
 		{
 			[DebuggerStepThrough]
@@ -843,6 +882,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonNumericAsString
 		{
 			[DebuggerStepThrough]
@@ -867,6 +907,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonRealAsString
 		{
 			[DebuggerStepThrough]
@@ -891,6 +932,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonSmallDateTimeAsString
 		{
 			[DebuggerStepThrough]
@@ -915,6 +957,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonSmallIntAsString
 		{
 			[DebuggerStepThrough]
@@ -939,6 +982,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonSmallMoneyAsString
 		{
 			[DebuggerStepThrough]
@@ -963,6 +1007,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonSqlVariantAsString
 		{
 			[DebuggerStepThrough]
@@ -987,6 +1032,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonTimeStampAsString
 		{
 			[DebuggerStepThrough]
@@ -1003,6 +1049,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonTinyIntAsString
 		{
 			[DebuggerStepThrough]
@@ -1027,6 +1074,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonUniqueIdentifierAsString
 		{
 			[DebuggerStepThrough]
@@ -1051,6 +1099,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonVarBinaryAsString
 		{
 			[DebuggerStepThrough]
@@ -1067,6 +1116,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KolonVarBinaryMaxAsString
 		{
 			[DebuggerStepThrough]
@@ -1081,39 +1131,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string OrnekTabloKey = "OrnekTabloKey";
-		public const string KolonBigInt = "KolonBigInt";
-		public const string KolonBinary = "KolonBinary";
-		public const string KolonBit = "KolonBit";
-		public const string KolonChar = "KolonChar";
-		public const string KolonDateTime = "KolonDateTime";
-		public const string KolonDecimal = "KolonDecimal";
-		public const string KolonFloat = "KolonFloat";
-		public const string KolonImage = "KolonImage";
-		public const string KolonInt = "KolonInt";
-		public const string KolonMoney = "KolonMoney";
-		public const string KolonNchar = "KolonNChar";
-		public const string KolonNtext = "KolonNText";
-		public const string KolonNumeric = "KolonNumeric";
-		public const string KolonNvarchar = "KolonNVarchar";
-		public const string KolonNvarcharMax = "KolonNVarcharMax";
-		public const string KolonReal = "KolonReal";
-		public const string KolonSmallDateTime = "KolonSmallDateTime";
-		public const string KolonSmallInt = "KolonSmallInt";
-		public const string KolonSmallMoney = "KolonSmallMoney";
-		public const string KolonSqlVariant = "KolonSqlVariant";
-		public const string KolonText = "KolonText";
-		public const string KolonTimeStamp = "KolonTimeStamp";
-		public const string KolonTinyInt = "KolonTinyInt";
-		public const string KolonUniqueIdentifier = "KolonUniqueIdentifier";
-		public const string KolonVarBinary = "KolonVarBinary";
-		public const string KolonVarBinaryMax = "KolonVarBinaryMax";
-		public const string KolonVarchar = "KolonVarchar";
-		public const string KolonVarcharMax = "KolonVarcharMax";
-		public const string KolonXml = "KolonXml";
-	}
 		public OrnekTablo ShallowCopy()
 		{
 			OrnekTablo obj = new OrnekTablo();
@@ -1149,464 +1166,43 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.kolonXml = kolonXml;
 			return obj;
 		}
-	
+		
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
+		{
+		}
+		public class PropertyIsimleri
+		{
+			public const string OrnekTabloKey = "OrnekTabloKey";
+			public const string KolonBigInt = "KolonBigInt";
+			public const string KolonBinary = "KolonBinary";
+			public const string KolonBit = "KolonBit";
+			public const string KolonChar = "KolonChar";
+			public const string KolonDateTime = "KolonDateTime";
+			public const string KolonDecimal = "KolonDecimal";
+			public const string KolonFloat = "KolonFloat";
+			public const string KolonImage = "KolonImage";
+			public const string KolonInt = "KolonInt";
+			public const string KolonMoney = "KolonMoney";
+			public const string KolonNchar = "KolonNChar";
+			public const string KolonNtext = "KolonNText";
+			public const string KolonNumeric = "KolonNumeric";
+			public const string KolonNvarchar = "KolonNVarchar";
+			public const string KolonNvarcharMax = "KolonNVarcharMax";
+			public const string KolonReal = "KolonReal";
+			public const string KolonSmallDateTime = "KolonSmallDateTime";
+			public const string KolonSmallInt = "KolonSmallInt";
+			public const string KolonSmallMoney = "KolonSmallMoney";
+			public const string KolonSqlVariant = "KolonSqlVariant";
+			public const string KolonText = "KolonText";
+			public const string KolonTimeStamp = "KolonTimeStamp";
+			public const string KolonTinyInt = "KolonTinyInt";
+			public const string KolonUniqueIdentifier = "KolonUniqueIdentifier";
+			public const string KolonVarBinary = "KolonVarBinary";
+			public const string KolonVarBinaryMax = "KolonVarBinaryMax";
+			public const string KolonVarchar = "KolonVarchar";
+			public const string KolonVarcharMax = "KolonVarcharMax";
+			public const string KolonXml = "KolonXml";
+		}
 
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string OrnekTabloKey
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".OrnekTabloKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "OrnekTabloKey";
-				}
-			}
-		}
-		public static string KolonBigInt
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonBigInt"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonBigInt";
-				}
-			}
-		}
-		public static string KolonBinary
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonBinary"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonBinary";
-				}
-			}
-		}
-		public static string KolonBit
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonBit"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonBit";
-				}
-			}
-		}
-		public static string KolonChar
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonChar"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonChar";
-				}
-			}
-		}
-		public static string KolonDateTime
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonDateTime"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonDateTime";
-				}
-			}
-		}
-		public static string KolonDecimal
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonDecimal"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonDecimal";
-				}
-			}
-		}
-		public static string KolonFloat
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonFloat"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonFloat";
-				}
-			}
-		}
-		public static string KolonImage
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonImage"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonImage";
-				}
-			}
-		}
-		public static string KolonInt
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonInt"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonInt";
-				}
-			}
-		}
-		public static string KolonMoney
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonMoney"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonMoney";
-				}
-			}
-		}
-		public static string KolonNchar
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonNchar"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonNchar";
-				}
-			}
-		}
-		public static string KolonNtext
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonNtext"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonNtext";
-				}
-			}
-		}
-		public static string KolonNumeric
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonNumeric"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonNumeric";
-				}
-			}
-		}
-		public static string KolonNvarchar
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonNvarchar"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonNvarchar";
-				}
-			}
-		}
-		public static string KolonNvarcharMax
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonNvarcharMax"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonNvarcharMax";
-				}
-			}
-		}
-		public static string KolonReal
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonReal"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonReal";
-				}
-			}
-		}
-		public static string KolonSmallDateTime
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonSmallDateTime"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonSmallDateTime";
-				}
-			}
-		}
-		public static string KolonSmallInt
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonSmallInt"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonSmallInt";
-				}
-			}
-		}
-		public static string KolonSmallMoney
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonSmallMoney"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonSmallMoney";
-				}
-			}
-		}
-		public static string KolonSqlVariant
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonSqlVariant"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonSqlVariant";
-				}
-			}
-		}
-		public static string KolonText
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonText"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonText";
-				}
-			}
-		}
-		public static string KolonTimeStamp
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonTimeStamp"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonTimeStamp";
-				}
-			}
-		}
-		public static string KolonTinyInt
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonTinyInt"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonTinyInt";
-				}
-			}
-		}
-		public static string KolonUniqueIdentifier
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonUniqueIdentifier"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonUniqueIdentifier";
-				}
-			}
-		}
-		public static string KolonVarBinary
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonVarBinary"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonVarBinary";
-				}
-			}
-		}
-		public static string KolonVarBinaryMax
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonVarBinaryMax"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonVarBinaryMax";
-				}
-			}
-		}
-		public static string KolonVarchar
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonVarchar"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonVarchar";
-				}
-			}
-		}
-		public static string KolonVarcharMax
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonVarcharMax"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonVarcharMax";
-				}
-			}
-		}
-		public static string KolonXml
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KolonXml"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KolonXml";
-				}
-			}
-		}
-	}
-}
 }

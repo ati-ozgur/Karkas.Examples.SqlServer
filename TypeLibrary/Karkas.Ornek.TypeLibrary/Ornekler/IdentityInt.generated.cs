@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("IdentityIntKey = {IdentityIntKey}")]
@@ -19,6 +19,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private int identityIntKey;
 		private string adi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public int IdentityIntKey
 		{
@@ -38,6 +39,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -59,6 +62,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string IdentityIntKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -81,11 +85,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string IdentityIntKey = "IdentityIntKey";
-		public const string Adi = "Adi";
-	}
 		public IdentityInt ShallowCopy()
 		{
 			IdentityInt obj = new IdentityInt();
@@ -93,44 +92,15 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.adi = adi;
 			return obj;
 		}
-	
+		
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
+		{
+		}
+		public class PropertyIsimleri
+		{
+			public const string IdentityIntKey = "IdentityIntKey";
+			public const string Adi = "Adi";
+		}
 
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string IdentityIntKey
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".IdentityIntKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "IdentityIntKey";
-				}
-			}
-		}
-		public static string Adi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
-		}
-	}
-}
 }

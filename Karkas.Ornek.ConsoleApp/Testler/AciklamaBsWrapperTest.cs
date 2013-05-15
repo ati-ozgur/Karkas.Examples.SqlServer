@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Karkas.Ornek.Dal.Ornekler;
 using Karkas.Ornek.TypeLibrary.Ornekler;
-using Karkas.Ornek.BsWrapper.Ornekler;
+using Karkas.Ornek.Bs.Ornekler;
 
 namespace Karkas.Ornek.ConsoleApp.Testler
 {
@@ -23,7 +23,7 @@ namespace Karkas.Ornek.ConsoleApp.Testler
         public void Ekle()
         {
             Aciklama a = new Aciklama();
-            AciklamaBsWrapper bs = new AciklamaBsWrapper();
+            AciklamaBs bs = new AciklamaBs();
             a.AciklamaKey = Guid.NewGuid();
             a.AciklamaProperty = "Deneme";
 
@@ -33,7 +33,7 @@ namespace Karkas.Ornek.ConsoleApp.Testler
         [Test]
         public void Guncelle()
         {
-            AciklamaBsWrapper bsWrapper = new AciklamaBsWrapper();
+            AciklamaBs bsWrapper = new AciklamaBs();
             List<Aciklama> liste = bsWrapper.SorgulaHepsiniGetir();
             if (liste.Count > 0)
             {
@@ -63,7 +63,7 @@ namespace Karkas.Ornek.ConsoleApp.Testler
         [Test]
         public void ornekMusteriEkleGuncelleSil()
         {
-            AciklamaBsWrapper wrapper = new AciklamaBsWrapper();
+            AciklamaBs wrapper = new AciklamaBs();
             Aciklama a = ornekAciklamaGetir();
             wrapper.Ekle(a);
 

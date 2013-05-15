@@ -18,7 +18,7 @@ namespace Karkas.Ornek.Bs.Ornekler
 		{
 			get
 			{
-				return "KARKAS_ORNEK";
+				return "Karkas.Ornek";
 			}
 		}
 		public void Sil(Guid pOrnekTabloKey)

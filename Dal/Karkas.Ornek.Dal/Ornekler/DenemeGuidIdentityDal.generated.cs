@@ -19,12 +19,11 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(DenemeGuidIdentity pTypeLibrary,long pIdentityKolonValue)
 	{
-		pTypeLibrary.DenemeNo = (int )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -44,7 +43,7 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.DENEME_GUID_IDENTITY WHERE DenemeKey = @DenemeKey";
+			return @"DELETE   FROM ORNEKLER.DENEME_GUID_IDENTITY WHERE DenemeKey = @DenemeKey ";
 		}
 	}
 	protected override string UpdateString
@@ -53,9 +52,12 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 		{
 			return @"UPDATE ORNEKLER.DENEME_GUID_IDENTITY
 			 SET 
-			DenemeKolon = @DenemeKolon			
+			DenemeNo = @DenemeNo
+,DenemeKolon = @DenemeKolon
+			
 			WHERE 
-			 DenemeKey = @DenemeKey ";
+			 DenemeKey = @DenemeKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -63,9 +65,9 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.DENEME_GUID_IDENTITY 
-			 (DenemeKey,DenemeKolon) 
+			 (DenemeKey,DenemeNo,DenemeKolon) 
 			 VALUES 
-						(@DenemeKey,@DenemeKolon);SELECT scope_identity();";
+						(@DenemeKey,@DenemeNo,@DenemeKolon)";
 		}
 	}
 	public DenemeGuidIdentity SorgulaDenemeKeyIle(Guid p1)
@@ -86,7 +88,7 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 	{
 		get
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,32 +111,44 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 	
 	public virtual void Sil(Guid DenemeKey)
 	{
-		DenemeGuidIdentity row = new DenemeGuidIdentity();
-		row.DenemeKey = DenemeKey;
-		base.Sil(row);
+		DenemeGuidIdentity satir = new DenemeGuidIdentity();
+		satir.DenemeKey = DenemeKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, DenemeGuidIdentity row)
+	protected override void ProcessRow(IDataReader dr, DenemeGuidIdentity satir)
 	{
-		row.DenemeKey = dr.GetGuid(0);
-		row.DenemeNo = dr.GetInt32(1);
-		row.DenemeKolon = dr.GetString(2);
+		satir.DenemeKey = dr.GetGuid(0);
+		satir.DenemeNo = dr.GetInt32(1);
+		satir.DenemeKolon = dr.GetString(2);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, DenemeGuidIdentity row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, DenemeGuidIdentity satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, row.DenemeKey);
-		builder.parameterEkle("@DenemeKolon",SqlDbType.VarChar, row.DenemeKolon,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, satir.DenemeKey);
+		builder.parameterEkle("@DenemeNo",SqlDbType.Int, satir.DenemeNo);
+		builder.parameterEkle("@DenemeKolon",SqlDbType.VarChar, satir.DenemeKolon,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	DenemeGuidIdentity	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	DenemeGuidIdentity	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, row.DenemeKey);
-		builder.parameterEkle("@DenemeKolon",SqlDbType.VarChar, row.DenemeKolon,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, satir.DenemeKey);
+		builder.parameterEkle("@DenemeNo",SqlDbType.Int, satir.DenemeNo);
+		builder.parameterEkle("@DenemeKolon",SqlDbType.VarChar, satir.DenemeKolon,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	DenemeGuidIdentity	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	DenemeGuidIdentity	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, row.DenemeKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, satir.DenemeKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

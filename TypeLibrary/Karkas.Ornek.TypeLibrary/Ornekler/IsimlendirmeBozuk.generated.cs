@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("KisiOid = {KisiOid}")]
@@ -20,6 +20,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private string adi;
 		private string soyadi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public int KisiOid
 		{
@@ -39,6 +40,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -58,6 +60,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Soyadi
 		{
@@ -79,6 +82,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KisiOidAsString
 		{
 			[DebuggerStepThrough]
@@ -101,12 +105,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string KisiOid = "KISI_OID";
-		public const string Adi = "ADI";
-		public const string Soyadi = "SOYADI";
-	}
 		public IsimlendirmeBozuk ShallowCopy()
 		{
 			IsimlendirmeBozuk obj = new IsimlendirmeBozuk();
@@ -115,61 +113,18 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.soyadi = soyadi;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Soyadi"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string KisiOid
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".KisiOid"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "KisiOid";
-				}
-			}
-		}
-		public static string Adi
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Soyadi"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
+			public const string KisiOid = "KISI_OID";
+			public const string Adi = "ADI";
+			public const string Soyadi = "SOYADI";
 		}
-		public static string Soyadi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Soyadi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Soyadi";
-				}
-			}
-		}
+
 	}
-}
 }

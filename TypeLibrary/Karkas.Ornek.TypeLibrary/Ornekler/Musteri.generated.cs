@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("MusteriKey = {MusteriKey}")]
@@ -26,6 +26,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private Nullable<decimal> kredisi;
 		private string tamAdi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid MusteriKey
 		{
@@ -45,6 +46,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -64,6 +66,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Soyadi
 		{
@@ -83,6 +86,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string IkinciAdi
 		{
@@ -102,6 +107,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<DateTime> DogumTarihi
 		{
@@ -178,6 +184,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(152)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string TamAdi
 		{
@@ -199,6 +207,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string MusteriKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -223,6 +232,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string DogumTarihiAsString
 		{
 			[DebuggerStepThrough]
@@ -247,6 +257,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string AktifMiAsString
 		{
 			[DebuggerStepThrough]
@@ -271,6 +282,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string OnemiAsString
 		{
 			[DebuggerStepThrough]
@@ -295,6 +307,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string KredisiAsString
 		{
 			[DebuggerStepThrough]
@@ -317,18 +330,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string MusteriKey = "MusteriKey";
-		public const string Adi = "Adi";
-		public const string Soyadi = "Soyadi";
-		public const string IkinciAdi = "IkinciAdi";
-		public const string DogumTarihi = "DogumTarihi";
-		public const string AktifMi = "AktifMi";
-		public const string Onemi = "Onemi";
-		public const string Kredisi = "Kredisi";
-		public const string TamAdi = "TamAdi";
-	}
 		public Musteri ShallowCopy()
 		{
 			Musteri obj = new Musteri();
@@ -343,152 +344,25 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.tamAdi = tamAdi;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Soyadi"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "AktifMi"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string MusteriKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".MusteriKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "MusteriKey";
-				}
-			}
-		}
-		public static string Adi
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Soyadi"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "AktifMi"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
+			public const string MusteriKey = "MusteriKey";
+			public const string Adi = "Adi";
+			public const string Soyadi = "Soyadi";
+			public const string IkinciAdi = "IkinciAdi";
+			public const string DogumTarihi = "DogumTarihi";
+			public const string AktifMi = "AktifMi";
+			public const string Onemi = "Onemi";
+			public const string Kredisi = "Kredisi";
+			public const string TamAdi = "TamAdi";
 		}
-		public static string Soyadi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Soyadi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Soyadi";
-				}
-			}
-		}
-		public static string IkinciAdi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".IkinciAdi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "IkinciAdi";
-				}
-			}
-		}
-		public static string DogumTarihi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".DogumTarihi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "DogumTarihi";
-				}
-			}
-		}
-		public static string AktifMi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".AktifMi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "AktifMi";
-				}
-			}
-		}
-		public static string Onemi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Onemi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Onemi";
-				}
-			}
-		}
-		public static string Kredisi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Kredisi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Kredisi";
-				}
-			}
-		}
-		public static string TamAdi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".TamAdi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "TamAdi";
-				}
-			}
-		}
+
 	}
-}
 }

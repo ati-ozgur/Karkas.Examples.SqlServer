@@ -19,7 +19,7 @@ public partial class MusteriSiparisDal : BaseDal<MusteriSiparis>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(MusteriSiparis pTypeLibrary,long pIdentityKolonValue)
@@ -43,7 +43,7 @@ public partial class MusteriSiparisDal : BaseDal<MusteriSiparis>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.MUSTERI_SIPARIS WHERE MusteriSiparisKey = @MusteriSiparisKey";
+			return @"DELETE   FROM ORNEKLER.MUSTERI_SIPARIS WHERE MusteriSiparisKey = @MusteriSiparisKey ";
 		}
 	}
 	protected override string UpdateString
@@ -52,9 +52,13 @@ public partial class MusteriSiparisDal : BaseDal<MusteriSiparis>
 		{
 			return @"UPDATE ORNEKLER.MUSTERI_SIPARIS
 			 SET 
-			MusteriKey = @MusteriKey,Tutar = @Tutar,SiparisTarihi = @SiparisTarihi			
+			MusteriKey = @MusteriKey
+,Tutar = @Tutar
+,SiparisTarihi = @SiparisTarihi
+			
 			WHERE 
-			 MusteriSiparisKey = @MusteriSiparisKey ";
+			 MusteriSiparisKey = @MusteriSiparisKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -108,37 +112,47 @@ public partial class MusteriSiparisDal : BaseDal<MusteriSiparis>
 	
 	public virtual void Sil(Guid MusteriSiparisKey)
 	{
-		MusteriSiparis row = new MusteriSiparis();
-		row.MusteriSiparisKey = MusteriSiparisKey;
-		base.Sil(row);
+		MusteriSiparis satir = new MusteriSiparis();
+		satir.MusteriSiparisKey = MusteriSiparisKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, MusteriSiparis row)
+	protected override void ProcessRow(IDataReader dr, MusteriSiparis satir)
 	{
-		row.MusteriSiparisKey = dr.GetGuid(0);
-		row.MusteriKey = dr.GetGuid(1);
-		row.Tutar = dr.GetDecimal(2);
-		row.SiparisTarihi = dr.GetDateTime(3);
+		satir.MusteriSiparisKey = dr.GetGuid(0);
+		satir.MusteriKey = dr.GetGuid(1);
+		satir.Tutar = dr.GetDecimal(2);
+		satir.SiparisTarihi = dr.GetDateTime(3);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, MusteriSiparis row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, MusteriSiparis satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@MusteriSiparisKey",SqlDbType.UniqueIdentifier, row.MusteriSiparisKey);
-		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, row.MusteriKey);
-		builder.parameterEkle("@Tutar",SqlDbType.Decimal, row.Tutar);
-		builder.parameterEkle("@SiparisTarihi",SqlDbType.DateTime, row.SiparisTarihi);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@MusteriSiparisKey",SqlDbType.UniqueIdentifier, satir.MusteriSiparisKey);
+		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, satir.MusteriKey);
+		builder.parameterEkle("@Tutar",SqlDbType.Decimal, satir.Tutar);
+		builder.parameterEkle("@SiparisTarihi",SqlDbType.DateTime, satir.SiparisTarihi);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	MusteriSiparis	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	MusteriSiparis	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@MusteriSiparisKey",SqlDbType.UniqueIdentifier, row.MusteriSiparisKey);
-		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, row.MusteriKey);
-		builder.parameterEkle("@Tutar",SqlDbType.Decimal, row.Tutar);
-		builder.parameterEkle("@SiparisTarihi",SqlDbType.DateTime, row.SiparisTarihi);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@MusteriSiparisKey",SqlDbType.UniqueIdentifier, satir.MusteriSiparisKey);
+		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, satir.MusteriKey);
+		builder.parameterEkle("@Tutar",SqlDbType.Decimal, satir.Tutar);
+		builder.parameterEkle("@SiparisTarihi",SqlDbType.DateTime, satir.SiparisTarihi);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	MusteriSiparis	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	MusteriSiparis	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@MusteriSiparisKey",SqlDbType.UniqueIdentifier, row.MusteriSiparisKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@MusteriSiparisKey",SqlDbType.UniqueIdentifier, satir.MusteriSiparisKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

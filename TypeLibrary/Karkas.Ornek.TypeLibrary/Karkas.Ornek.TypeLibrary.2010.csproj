@@ -36,18 +36,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Karkas.Core.Onaylama">
-      <HintPath>..\..\ThirdParty\2010\Karkas.Core.Onaylama.dll</HintPath>
+      <HintPath>..\..\packages\Karkas.Core.Onaylama.1.0.0\lib\Karkas.Core.Onaylama.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dbo\OrnekSistemView.cs" />
-    <Compile Include="Dbo\OrnekSistemView.generated.cs" />
     <Compile Include="Enums\TtOrnekler\OrnekTur.cs" />
     <Compile Include="Ornekler\Aciklama.cs" />
     <Compile Include="Ornekler\Aciklama.generated.cs" />
@@ -76,6 +75,12 @@
     <Compile Include="Ornekler\OrnekTablo.cs" />
     <Compile Include="Ornekler\OrnekTablo.generated.cs" />
     <Compile Include="SessionEnumHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dbo\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

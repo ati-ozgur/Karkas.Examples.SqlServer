@@ -16,7 +16,7 @@ namespace Karkas.Ornek.Dal.Ornekler
 			, AdoTemplate template
 			)
 			{
-				ParameterBuilder builder = new ParameterBuilder();
+                ParameterBuilder builder = template.getParameterBuilder();
 				 builder.parameterEkleReturnValue( "@RETURN_VALUE",DbType.Int32);
 				 builder.parameterEkle( "@SAYI",DbType.Int32,@SAYI);
 				 builder.parameterEkleOutput( "@SAYI_YAZI",DbType.String,255);

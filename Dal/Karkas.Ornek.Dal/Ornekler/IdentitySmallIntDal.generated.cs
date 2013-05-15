@@ -19,12 +19,11 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(IdentitySmallInt pTypeLibrary,long pIdentityKolonValue)
 	{
-		pTypeLibrary.IdentitySmallIntKey = (short )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -44,7 +43,7 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.IDENTITY_SMALL_INT WHERE IdentitySmallIntKey = @IdentitySmallIntKey";
+			return @"DELETE   FROM ORNEKLER.IDENTITY_SMALL_INT WHERE IdentitySmallIntKey = @IdentitySmallIntKey ";
 		}
 	}
 	protected override string UpdateString
@@ -53,9 +52,11 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 		{
 			return @"UPDATE ORNEKLER.IDENTITY_SMALL_INT
 			 SET 
-			Adi = @Adi			
+			Adi = @Adi
+			
 			WHERE 
-			 IdentitySmallIntKey = @IdentitySmallIntKey ";
+			 IdentitySmallIntKey = @IdentitySmallIntKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -63,9 +64,9 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.IDENTITY_SMALL_INT 
-			 (Adi) 
+			 (IdentitySmallIntKey,Adi) 
 			 VALUES 
-						(@Adi);SELECT scope_identity();";
+						(@IdentitySmallIntKey,@Adi)";
 		}
 	}
 	public IdentitySmallInt SorgulaIdentitySmallIntKeyIle(short p1)
@@ -86,7 +87,7 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	{
 		get
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,30 +110,41 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	
 	public virtual void Sil(short IdentitySmallIntKey)
 	{
-		IdentitySmallInt row = new IdentitySmallInt();
-		row.IdentitySmallIntKey = IdentitySmallIntKey;
-		base.Sil(row);
+		IdentitySmallInt satir = new IdentitySmallInt();
+		satir.IdentitySmallIntKey = IdentitySmallIntKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, IdentitySmallInt row)
+	protected override void ProcessRow(IDataReader dr, IdentitySmallInt satir)
 	{
-		row.IdentitySmallIntKey = dr.GetInt16(0);
-		row.Adi = dr.GetString(1);
+		satir.IdentitySmallIntKey = dr.GetInt16(0);
+		satir.Adi = dr.GetString(1);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentitySmallInt row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentitySmallInt satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentitySmallIntKey",SqlDbType.SmallInt, satir.IdentitySmallIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentitySmallInt	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentitySmallInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentitySmallIntKey",SqlDbType.SmallInt, row.IdentitySmallIntKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentitySmallIntKey",SqlDbType.SmallInt, satir.IdentitySmallIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentitySmallInt	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentitySmallInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentitySmallIntKey",SqlDbType.SmallInt, row.IdentitySmallIntKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentitySmallIntKey",SqlDbType.SmallInt, satir.IdentitySmallIntKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

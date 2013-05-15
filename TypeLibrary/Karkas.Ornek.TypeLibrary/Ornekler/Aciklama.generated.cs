@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("AciklamaKey = {AciklamaKey}")]
@@ -19,6 +19,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private Guid aciklamaKey;
 		private string aciklama;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid AciklamaKey
 		{
@@ -38,6 +39,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string AciklamaProperty
 		{
@@ -59,6 +61,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string AciklamaKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -81,11 +84,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string AciklamaKey = "AciklamaKey";
-		public const string AciklamaProperty = "Aciklama";
-	}
 		public Aciklama ShallowCopy()
 		{
 			Aciklama obj = new Aciklama();
@@ -93,45 +91,16 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.aciklama = aciklama;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "AciklamaProperty"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string AciklamaKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".AciklamaKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "AciklamaKey";
-				}
-			}
-		}
-		public static string Aciklama
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "AciklamaProperty"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Aciklama"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Aciklama";
-				}
-			}
+			public const string AciklamaKey = "AciklamaKey";
+			public const string AciklamaProperty = "Aciklama";
 		}
+
 	}
-}
 }

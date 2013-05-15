@@ -19,12 +19,11 @@ public partial class IdentityBigIntDal : BaseDal<IdentityBigInt>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(IdentityBigInt pTypeLibrary,long pIdentityKolonValue)
 	{
-		pTypeLibrary.IdentityBigIntKey = (long )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -44,7 +43,7 @@ public partial class IdentityBigIntDal : BaseDal<IdentityBigInt>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.IDENTITY_BIG_INT WHERE IdentityBigIntKey = @IdentityBigIntKey";
+			return @"DELETE   FROM ORNEKLER.IDENTITY_BIG_INT WHERE IdentityBigIntKey = @IdentityBigIntKey ";
 		}
 	}
 	protected override string UpdateString
@@ -53,9 +52,11 @@ public partial class IdentityBigIntDal : BaseDal<IdentityBigInt>
 		{
 			return @"UPDATE ORNEKLER.IDENTITY_BIG_INT
 			 SET 
-			Adi = @Adi			
+			Adi = @Adi
+			
 			WHERE 
-			 IdentityBigIntKey = @IdentityBigIntKey ";
+			 IdentityBigIntKey = @IdentityBigIntKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -63,9 +64,9 @@ public partial class IdentityBigIntDal : BaseDal<IdentityBigInt>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.IDENTITY_BIG_INT 
-			 (Adi) 
+			 (IdentityBigIntKey,Adi) 
 			 VALUES 
-						(@Adi);SELECT scope_identity();";
+						(@IdentityBigIntKey,@Adi)";
 		}
 	}
 	public IdentityBigInt SorgulaIdentityBigIntKeyIle(long p1)
@@ -86,7 +87,7 @@ public partial class IdentityBigIntDal : BaseDal<IdentityBigInt>
 	{
 		get
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,33 +110,44 @@ public partial class IdentityBigIntDal : BaseDal<IdentityBigInt>
 	
 	public virtual void Sil(long IdentityBigIntKey)
 	{
-		IdentityBigInt row = new IdentityBigInt();
-		row.IdentityBigIntKey = IdentityBigIntKey;
-		base.Sil(row);
+		IdentityBigInt satir = new IdentityBigInt();
+		satir.IdentityBigIntKey = IdentityBigIntKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, IdentityBigInt row)
+	protected override void ProcessRow(IDataReader dr, IdentityBigInt satir)
 	{
-		row.IdentityBigIntKey = dr.GetInt64(0);
+		satir.IdentityBigIntKey = dr.GetInt64(0);
 		if (!dr.IsDBNull(1))
 		{
-			row.Adi = dr.GetString(1);
+			satir.Adi = dr.GetString(1);
 		}
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentityBigInt row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentityBigInt satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityBigIntKey",SqlDbType.BigInt, satir.IdentityBigIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentityBigInt	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentityBigInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentityBigIntKey",SqlDbType.BigInt, row.IdentityBigIntKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityBigIntKey",SqlDbType.BigInt, satir.IdentityBigIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentityBigInt	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentityBigInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentityBigIntKey",SqlDbType.BigInt, row.IdentityBigIntKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityBigIntKey",SqlDbType.BigInt, satir.IdentityBigIntKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

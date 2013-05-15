@@ -35,15 +35,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Karkas.Core.DataUtil, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdParty\2010\Karkas.Core.DataUtil.dll</HintPath>
+    <Reference Include="Karkas.Core.DataUtil">
+      <HintPath>..\..\packages\Karkas.Core.DataUtil.1.0.0\lib\Karkas.Core.DataUtil.dll</HintPath>
     </Reference>
-    <Reference Include="Karkas.Core.Onaylama, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdParty\2010\Karkas.Core.Onaylama.dll</HintPath>
+    <Reference Include="Karkas.Core.ExtensionsMethods">
+      <HintPath>..\..\packages\Karkas.Core.ExtensionsMethods.1.0.0\lib\Karkas.Core.ExtensionsMethods.dll</HintPath>
     </Reference>
+    <Reference Include="Karkas.Core.Onaylama">
+      <HintPath>..\..\packages\Karkas.Core.Onaylama.1.0.0\lib\Karkas.Core.Onaylama.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -55,8 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Dbo\OrnekSistemViewBs.cs" />
-    <Compile Include="Dbo\OrnekSistemViewBs.generated.cs" />
     <Compile Include="Ornekler\AciklamaBs.cs" />
     <Compile Include="Ornekler\AciklamaBs.generated.cs" />
     <Compile Include="Ornekler\BasitTabloBs.cs" />
@@ -75,8 +79,6 @@
     <Compile Include="Ornekler\IdentitySmallIntBs.generated.cs" />
     <Compile Include="Ornekler\IdentityTinyIntBs.cs" />
     <Compile Include="Ornekler\IdentityTinyIntBs.generated.cs" />
-    <Compile Include="Ornekler\IsimlendirmeBozukBs.cs" />
-    <Compile Include="Ornekler\IsimlendirmeBozukBs.generated.cs" />
     <Compile Include="Ornekler\MusteriBs.cs" />
     <Compile Include="Ornekler\MusteriBs.generated.cs" />
     <Compile Include="Ornekler\MusteriSiparisBs.cs" />
@@ -94,6 +96,12 @@
       <Project>{A74FFCF8-27F3-4839-B03C-4F80D0D863CC}</Project>
       <Name>Karkas.Ornek.TypeLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dbo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

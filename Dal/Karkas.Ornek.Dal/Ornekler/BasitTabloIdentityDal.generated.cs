@@ -19,12 +19,11 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(BasitTabloIdentity pTypeLibrary,long pIdentityKolonValue)
 	{
-		pTypeLibrary.BasitTabloIdentityKey = (int )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -44,7 +43,7 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.BASIT_TABLO_IDENTITY WHERE BasitTabloIdentityKey = @BasitTabloIdentityKey";
+			return @"DELETE   FROM ORNEKLER.BASIT_TABLO_IDENTITY WHERE BasitTabloIdentityKey = @BasitTabloIdentityKey ";
 		}
 	}
 	protected override string UpdateString
@@ -53,9 +52,12 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 		{
 			return @"UPDATE ORNEKLER.BASIT_TABLO_IDENTITY
 			 SET 
-			Adi = @Adi,Soyadi = @Soyadi			
+			Adi = @Adi
+,Soyadi = @Soyadi
+			
 			WHERE 
-			 BasitTabloIdentityKey = @BasitTabloIdentityKey ";
+			 BasitTabloIdentityKey = @BasitTabloIdentityKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -63,9 +65,9 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.BASIT_TABLO_IDENTITY 
-			 (Adi,Soyadi) 
+			 (BasitTabloIdentityKey,Adi,Soyadi) 
 			 VALUES 
-						(@Adi,@Soyadi);SELECT scope_identity();";
+						(@BasitTabloIdentityKey,@Adi,@Soyadi)";
 		}
 	}
 	public BasitTabloIdentity SorgulaBasitTabloIdentityKeyIle(int p1)
@@ -86,7 +88,7 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	{
 		get
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,33 +111,44 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	
 	public virtual void Sil(int BasitTabloIdentityKey)
 	{
-		BasitTabloIdentity row = new BasitTabloIdentity();
-		row.BasitTabloIdentityKey = BasitTabloIdentityKey;
-		base.Sil(row);
+		BasitTabloIdentity satir = new BasitTabloIdentity();
+		satir.BasitTabloIdentityKey = BasitTabloIdentityKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, BasitTabloIdentity row)
+	protected override void ProcessRow(IDataReader dr, BasitTabloIdentity satir)
 	{
-		row.BasitTabloIdentityKey = dr.GetInt32(0);
-		row.Adi = dr.GetString(1);
-		row.Soyadi = dr.GetString(2);
+		satir.BasitTabloIdentityKey = dr.GetInt32(0);
+		satir.Adi = dr.GetString(1);
+		satir.Soyadi = dr.GetString(2);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, BasitTabloIdentity row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, BasitTabloIdentity satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, row.Soyadi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@BasitTabloIdentityKey",SqlDbType.Int, satir.BasitTabloIdentityKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, satir.Soyadi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	BasitTabloIdentity	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	BasitTabloIdentity	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@BasitTabloIdentityKey",SqlDbType.Int, row.BasitTabloIdentityKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, row.Soyadi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@BasitTabloIdentityKey",SqlDbType.Int, satir.BasitTabloIdentityKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, satir.Soyadi,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	BasitTabloIdentity	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	BasitTabloIdentity	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@BasitTabloIdentityKey",SqlDbType.Int, row.BasitTabloIdentityKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@BasitTabloIdentityKey",SqlDbType.Int, satir.BasitTabloIdentityKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

@@ -14,7 +14,7 @@ namespace Karkas.Ornek.Dal.Ornekler
 			AdoTemplate template
 			)
 			{
-				ParameterBuilder builder = new ParameterBuilder();
+                ParameterBuilder builder = template.getParameterBuilder();
 				
 				SqlCommand cmd = new SqlCommand();
 				cmd.CommandText = "ORNEKLER.MUSTERI_SORGULA_HEPSINI_GETIR";

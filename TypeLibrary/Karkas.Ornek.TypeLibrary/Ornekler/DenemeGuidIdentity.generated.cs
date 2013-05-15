@@ -8,18 +8,19 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
-	[DebuggerDisplay("DenemeKey = {DenemeKey}DenemeNo = {DenemeNo}")]
+	[DebuggerDisplay("DenemeKey = {DenemeKey}")]
 	public partial class 	DenemeGuidIdentity: BaseTypeLibrary
 	{
 		private Guid denemeKey;
 		private int denemeNo;
 		private string denemeKolon;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid DenemeKey
 		{
@@ -58,6 +59,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string DenemeKolon
 		{
@@ -79,6 +81,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string DenemeKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -103,6 +106,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string DenemeNoAsString
 		{
 			[DebuggerStepThrough]
@@ -125,12 +129,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string DenemeKey = "DenemeKey";
-		public const string DenemeNo = "DenemeNo";
-		public const string DenemeKolon = "DenemeKolon";
-	}
 		public DenemeGuidIdentity ShallowCopy()
 		{
 			DenemeGuidIdentity obj = new DenemeGuidIdentity();
@@ -139,61 +137,18 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.denemeKolon = denemeKolon;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "DenemeNo"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "DenemeKolon"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string DenemeKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".DenemeKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "DenemeKey";
-				}
-			}
-		}
-		public static string DenemeNo
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "DenemeNo"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "DenemeKolon"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".DenemeNo"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "DenemeNo";
-				}
-			}
+			public const string DenemeKey = "DenemeKey";
+			public const string DenemeNo = "DenemeNo";
+			public const string DenemeKolon = "DenemeKolon";
 		}
-		public static string DenemeKolon
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".DenemeKolon"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "DenemeKolon";
-				}
-			}
-		}
+
 	}
-}
 }

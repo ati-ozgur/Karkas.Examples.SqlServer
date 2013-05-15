@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("IdentityBigIntKey = {IdentityBigIntKey}")]
@@ -19,6 +19,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private long identityBigIntKey;
 		private string adi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public long IdentityBigIntKey
 		{
@@ -38,6 +39,8 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -59,6 +62,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string IdentityBigIntKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -81,11 +85,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string IdentityBigIntKey = "IdentityBigIntKey";
-		public const string Adi = "Adi";
-	}
 		public IdentityBigInt ShallowCopy()
 		{
 			IdentityBigInt obj = new IdentityBigInt();
@@ -93,44 +92,15 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.adi = adi;
 			return obj;
 		}
-	
+		
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
+		{
+		}
+		public class PropertyIsimleri
+		{
+			public const string IdentityBigIntKey = "IdentityBigIntKey";
+			public const string Adi = "Adi";
+		}
 
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string IdentityBigIntKey
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".IdentityBigIntKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "IdentityBigIntKey";
-				}
-			}
-		}
-		public static string Adi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
-		}
-	}
-}
 }

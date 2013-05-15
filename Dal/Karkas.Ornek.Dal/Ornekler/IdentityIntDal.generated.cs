@@ -19,12 +19,11 @@ public partial class IdentityIntDal : BaseDal<IdentityInt>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(IdentityInt pTypeLibrary,long pIdentityKolonValue)
 	{
-		pTypeLibrary.IdentityIntKey = (int )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -44,7 +43,7 @@ public partial class IdentityIntDal : BaseDal<IdentityInt>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.IDENTITY_INT WHERE IdentityIntKey = @IdentityIntKey";
+			return @"DELETE   FROM ORNEKLER.IDENTITY_INT WHERE IdentityIntKey = @IdentityIntKey ";
 		}
 	}
 	protected override string UpdateString
@@ -53,9 +52,11 @@ public partial class IdentityIntDal : BaseDal<IdentityInt>
 		{
 			return @"UPDATE ORNEKLER.IDENTITY_INT
 			 SET 
-			Adi = @Adi			
+			Adi = @Adi
+			
 			WHERE 
-			 IdentityIntKey = @IdentityIntKey ";
+			 IdentityIntKey = @IdentityIntKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -63,9 +64,9 @@ public partial class IdentityIntDal : BaseDal<IdentityInt>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.IDENTITY_INT 
-			 (Adi) 
+			 (IdentityIntKey,Adi) 
 			 VALUES 
-						(@Adi);SELECT scope_identity();";
+						(@IdentityIntKey,@Adi)";
 		}
 	}
 	public IdentityInt SorgulaIdentityIntKeyIle(int p1)
@@ -86,7 +87,7 @@ public partial class IdentityIntDal : BaseDal<IdentityInt>
 	{
 		get
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,33 +110,44 @@ public partial class IdentityIntDal : BaseDal<IdentityInt>
 	
 	public virtual void Sil(int IdentityIntKey)
 	{
-		IdentityInt row = new IdentityInt();
-		row.IdentityIntKey = IdentityIntKey;
-		base.Sil(row);
+		IdentityInt satir = new IdentityInt();
+		satir.IdentityIntKey = IdentityIntKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, IdentityInt row)
+	protected override void ProcessRow(IDataReader dr, IdentityInt satir)
 	{
-		row.IdentityIntKey = dr.GetInt32(0);
+		satir.IdentityIntKey = dr.GetInt32(0);
 		if (!dr.IsDBNull(1))
 		{
-			row.Adi = dr.GetString(1);
+			satir.Adi = dr.GetString(1);
 		}
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentityInt row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentityInt satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityIntKey",SqlDbType.Int, satir.IdentityIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentityInt	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentityInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentityIntKey",SqlDbType.Int, row.IdentityIntKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityIntKey",SqlDbType.Int, satir.IdentityIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentityInt	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentityInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentityIntKey",SqlDbType.Int, row.IdentityIntKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityIntKey",SqlDbType.Int, satir.IdentityIntKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

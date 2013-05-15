@@ -5,7 +5,6 @@ using System.Text;
 using NUnit.Framework;
 using Karkas.Ornek.TypeLibrary.Ornekler;
 using Karkas.Ornek.Bs.Ornekler;
-using Karkas.Ornek.BsWrapper.Ornekler;
 
 namespace Karkas.Ornek.ConsoleApp.Testler
 {
@@ -15,7 +14,7 @@ namespace Karkas.Ornek.ConsoleApp.Testler
         [Test]
         public void Ekle()
         {
-            MusteriBsWrapper wrapper = new MusteriBsWrapper();
+            MusteriBs wrapper = new MusteriBs();
             Musteri m = new Musteri();
             m.MusteriKey = Guid.NewGuid();
 

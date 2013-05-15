@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("")]
@@ -38,6 +38,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string DenemeKolon
 		{
@@ -59,6 +60,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string PrimaryKeyDegiAsString
 		{
 			[DebuggerStepThrough]
@@ -81,11 +83,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string PrimaryKeyDegi = "PrimaryKeyDegi";
-		public const string DenemeKolon = "DenemeKolon";
-	}
 		public PkOlmayan ShallowCopy()
 		{
 			PkOlmayan obj = new PkOlmayan();
@@ -93,46 +90,17 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.denemeKolon = denemeKolon;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "PrimaryKeyDegi"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "DenemeKolon"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string PrimaryKeyDegi
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".PrimaryKeyDegi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "PrimaryKeyDegi";
-				}
-			}
-		}
-		public static string DenemeKolon
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "PrimaryKeyDegi"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "DenemeKolon"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".DenemeKolon"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "DenemeKolon";
-				}
-			}
+			public const string PrimaryKeyDegi = "PrimaryKeyDegi";
+			public const string DenemeKolon = "DenemeKolon";
 		}
+
 	}
-}
 }

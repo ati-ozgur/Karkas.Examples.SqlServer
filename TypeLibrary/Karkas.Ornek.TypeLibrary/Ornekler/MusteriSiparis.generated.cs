@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("MusteriSiparisKey = {MusteriSiparisKey}MusteriKey = {MusteriKey}")]
@@ -21,6 +21,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private decimal tutar;
 		private DateTime siparisTarihi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid MusteriSiparisKey
 		{
@@ -99,6 +100,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string MusteriSiparisKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -123,6 +125,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string MusteriKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -147,6 +150,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string TutarAsString
 		{
 			[DebuggerStepThrough]
@@ -171,6 +175,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string SiparisTarihiAsString
 		{
 			[DebuggerStepThrough]
@@ -193,13 +198,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string MusteriSiparisKey = "MusteriSiparisKey";
-		public const string MusteriKey = "MusteriKey";
-		public const string Tutar = "Tutar";
-		public const string SiparisTarihi = "SiparisTarihi";
-	}
 		public MusteriSiparis ShallowCopy()
 		{
 			MusteriSiparis obj = new MusteriSiparis();
@@ -209,77 +207,20 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.siparisTarihi = siparisTarihi;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "MusteriKey"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Tutar"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "SiparisTarihi"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string MusteriSiparisKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".MusteriSiparisKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "MusteriSiparisKey";
-				}
-			}
-		}
-		public static string MusteriKey
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "MusteriKey"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Tutar"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "SiparisTarihi"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".MusteriKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "MusteriKey";
-				}
-			}
+			public const string MusteriSiparisKey = "MusteriSiparisKey";
+			public const string MusteriKey = "MusteriKey";
+			public const string Tutar = "Tutar";
+			public const string SiparisTarihi = "SiparisTarihi";
 		}
-		public static string Tutar
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Tutar"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Tutar";
-				}
-			}
-		}
-		public static string SiparisTarihi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".SiparisTarihi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "SiparisTarihi";
-				}
-			}
-		}
+
 	}
-}
 }

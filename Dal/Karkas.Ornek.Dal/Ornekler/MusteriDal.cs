@@ -19,7 +19,7 @@ namespace Karkas.Ornek.Dal.Ornekler
         {
             List<Musteri> liste = new List<Musteri>();
             string filtre = " TamAdi LIKE @TamAdi + '%'";
-            ParameterBuilder builder = new ParameterBuilder();
+            ParameterBuilder builder = Template.getParameterBuilder();
             builder.parameterEkle("@TamAdi", DbType.String, pTamAdi);
             SorguCalistir(liste, filtre, builder.GetParameterArray());
             return liste;
@@ -32,7 +32,7 @@ namespace Karkas.Ornek.Dal.Ornekler
             sy.WhereKriterineTercihliEkle(Musteri.PropertyIsimleri.Soyadi, WhereOperatorEnum.Like);
             List<Musteri> liste = new List<Musteri>();
             string filtre = sy.KriterSonucunuWhereOlmadanGetir();
-            ParameterBuilder builder = new ParameterBuilder();
+            ParameterBuilder builder = Template.getParameterBuilder();
             builder.parameterEkle("@Adi", DbType.String, pAdi);
             builder.parameterEkle("@Soyadi", DbType.String, pSoyadi, 50);
             SorguCalistir(liste, filtre, builder.GetParameterArray());
@@ -66,7 +66,7 @@ namespace Karkas.Ornek.Dal.Ornekler
         {
             string strSQL = @"SELECT *  FROM ORNEKLER.MUSTERI";
             SorguYardimcisi sy = new SorguYardimcisi();
-            ParameterBuilder builder = new ParameterBuilder();
+            ParameterBuilder builder = Template.getParameterBuilder();
             sy.WhereKriterineTercihliEkleNullDegeriVer("Adi", WhereOperatorEnum.Like, "@Adi", LikeYeriEnum.Icinde, "");
             sy.WhereKriterineTercihliEkleNullDegeriVer("Soyadi", WhereOperatorEnum.Like, "@Soyadi", LikeYeriEnum.Icinde, "");
             sy.WhereKriterineEkle("AktifMi", WhereOperatorEnum.Esittir, "@Aktifmi");

@@ -18,16 +18,16 @@ namespace Karkas.Ornek.Bs.Ornekler
 		{
 			get
 			{
-				return "KARKAS_ORNEK";
+				return "Karkas.Ornek";
 			}
 		}
 		public void Sil(int pKisiOid)
 		{
 			dal.Sil( pKisiOid);
 		}
-		public IsimlendirmeBozuk SorgulaKISI_OIDIle(int p1)
+		public IsimlendirmeBozuk SorgulaKisiOidIle(int p1)
 		{
-			return dal.SorgulaKISI_OIDIle(p1);
+			return dal.SorgulaKisiOidIle(p1);
 		}
 	}
 }

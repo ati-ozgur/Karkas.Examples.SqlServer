@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using Karkas.Core.TypeLibrary;
 using Karkas.Core.Onaylama;
 using Karkas.Core.Onaylama.ForPonos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Karkas.Ornek.TypeLibrary.Ornekler
-
 {
 	[Serializable]
 	[DebuggerDisplay("BasitTabloKey = {BasitTabloKey}")]
@@ -22,6 +22,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private Nullable<Guid> gkullaniciKey;
 		private Nullable<DateTime> utarihi;
 
+		[Key]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Guid BasitTabloKey
 		{
@@ -41,6 +42,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Adi
 		{
@@ -60,6 +62,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[StringLength(50)]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public string Soyadi
 		{
@@ -79,6 +82,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<Guid> GkullaniciKey
 		{
@@ -98,6 +102,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
+		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public Nullable<DateTime> Utarihi
 		{
@@ -119,6 +124,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string BasitTabloKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -143,6 +149,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string GkullaniciKeyAsString
 		{
 			[DebuggerStepThrough]
@@ -167,6 +174,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string UtarihiAsString
 		{
 			[DebuggerStepThrough]
@@ -189,14 +197,6 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			}
 		}
 
-	public class PropertyIsimleri
-	{
-		public const string BasitTabloKey = "BasitTabloKey";
-		public const string Adi = "Adi";
-		public const string Soyadi = "Soyadi";
-		public const string GkullaniciKey = "GKullaniciKey";
-		public const string Utarihi = "UTarihi";
-	}
 		public BasitTablo ShallowCopy()
 		{
 			BasitTablo obj = new BasitTablo();
@@ -207,91 +207,20 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			obj.utarihi = utarihi;
 			return obj;
 		}
-	
-
-	protected override void OnaylamaListesiniOlusturCodeGeneration()
-	{
 		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));		
-		this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Soyadi"));	}
-	public static class EtiketIsimleri
-	{
-		const string namespaceVeClass = "Karkas.Ornek.TypeLibrary.Ornekler";
-		public static string BasitTabloKey
+		protected override void OnaylamaListesiniOlusturCodeGeneration()
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".BasitTabloKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "BasitTabloKey";
-				}
-			}
-		}
-		public static string Adi
+			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Adi"));			
+			this.Onaylayici.OnaylayiciListesi.Add(new GerekliAlanOnaylayici(this, "Soyadi"));		}
+		public class PropertyIsimleri
 		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Adi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Adi";
-				}
-			}
+			public const string BasitTabloKey = "BasitTabloKey";
+			public const string Adi = "Adi";
+			public const string Soyadi = "Soyadi";
+			public const string GkullaniciKey = "GKullaniciKey";
+			public const string Utarihi = "UTarihi";
 		}
-		public static string Soyadi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Soyadi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Soyadi";
-				}
-			}
-		}
-		public static string GkullaniciKey
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".GkullaniciKey"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "GkullaniciKey";
-				}
-			}
-		}
-		public static string Utarihi
-		{
-			get
-			{
-				string s = ConfigurationManager.AppSettings[namespaceVeClass + ".Utarihi"];
-				if (s != null)
-				{
-					return s;
-				}
-				else
-				{
-					return "Utarihi";
-				}
-			}
-		}
+
 	}
-}
 }

@@ -19,7 +19,7 @@ public partial class ConcurrencyOrnekDal : BaseDal<ConcurrencyOrnek>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(ConcurrencyOrnek pTypeLibrary,long pIdentityKolonValue)
@@ -43,7 +43,7 @@ public partial class ConcurrencyOrnekDal : BaseDal<ConcurrencyOrnek>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.CONCURRENCY_ORNEK WHERE ConcurrencyOrnekKey = @ConcurrencyOrnekKey";
+			return @"DELETE   FROM ORNEKLER.CONCURRENCY_ORNEK WHERE ConcurrencyOrnekKey = @ConcurrencyOrnekKey ";
 		}
 	}
 	protected override string UpdateString
@@ -52,9 +52,12 @@ public partial class ConcurrencyOrnekDal : BaseDal<ConcurrencyOrnek>
 		{
 			return @"UPDATE ORNEKLER.CONCURRENCY_ORNEK
 			 SET 
-			Adi = @Adi			
+			Adi = @Adi
+			
 			WHERE 
-			 ConcurrencyOrnekKey = @ConcurrencyOrnekKey AND VersiyonZamani = @VersiyonZamani ";
+			 ConcurrencyOrnekKey = @ConcurrencyOrnekKey
+ AND VersiyonZamani = @VersiyonZamani
+ ";
 		}
 	}
 	protected override string InsertString
@@ -108,33 +111,43 @@ public partial class ConcurrencyOrnekDal : BaseDal<ConcurrencyOrnek>
 	
 	public virtual void Sil(Guid ConcurrencyOrnekKey)
 	{
-		ConcurrencyOrnek row = new ConcurrencyOrnek();
-		row.ConcurrencyOrnekKey = ConcurrencyOrnekKey;
-		base.Sil(row);
+		ConcurrencyOrnek satir = new ConcurrencyOrnek();
+		satir.ConcurrencyOrnekKey = ConcurrencyOrnekKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, ConcurrencyOrnek row)
+	protected override void ProcessRow(IDataReader dr, ConcurrencyOrnek satir)
 	{
-		row.ConcurrencyOrnekKey = dr.GetGuid(0);
-		row.Adi = dr.GetString(1);
-		row.VersiyonZamani = (Byte[])dr.GetValue(2);
+		satir.ConcurrencyOrnekKey = dr.GetGuid(0);
+		satir.Adi = dr.GetString(1);
+		satir.VersiyonZamani = (Byte[])dr.GetValue(2);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, ConcurrencyOrnek row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, ConcurrencyOrnek satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@ConcurrencyOrnekKey",SqlDbType.UniqueIdentifier, row.ConcurrencyOrnekKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@ConcurrencyOrnekKey",SqlDbType.UniqueIdentifier, satir.ConcurrencyOrnekKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	ConcurrencyOrnek	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	ConcurrencyOrnek	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@ConcurrencyOrnekKey",SqlDbType.UniqueIdentifier, row.ConcurrencyOrnekKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@VersiyonZamani",SqlDbType.Timestamp, row.VersiyonZamani);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@ConcurrencyOrnekKey",SqlDbType.UniqueIdentifier, satir.ConcurrencyOrnekKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@VersiyonZamani",SqlDbType.Timestamp, satir.VersiyonZamani);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	ConcurrencyOrnek	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	ConcurrencyOrnek	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@ConcurrencyOrnekKey",SqlDbType.UniqueIdentifier, row.ConcurrencyOrnekKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@ConcurrencyOrnekKey",SqlDbType.UniqueIdentifier, satir.ConcurrencyOrnekKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

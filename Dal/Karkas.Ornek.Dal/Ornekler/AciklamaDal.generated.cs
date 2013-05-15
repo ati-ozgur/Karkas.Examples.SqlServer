@@ -19,7 +19,7 @@ public partial class AciklamaDal : BaseDal<Aciklama>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(Aciklama pTypeLibrary,long pIdentityKolonValue)
@@ -43,7 +43,7 @@ public partial class AciklamaDal : BaseDal<Aciklama>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.ACIKLAMA WHERE AciklamaKey = @AciklamaKey";
+			return @"DELETE   FROM ORNEKLER.ACIKLAMA WHERE AciklamaKey = @AciklamaKey ";
 		}
 	}
 	protected override string UpdateString
@@ -52,9 +52,11 @@ public partial class AciklamaDal : BaseDal<Aciklama>
 		{
 			return @"UPDATE ORNEKLER.ACIKLAMA
 			 SET 
-			Aciklama = @Aciklama			
+			Aciklama = @Aciklama
+			
 			WHERE 
-			 AciklamaKey = @AciklamaKey ";
+			 AciklamaKey = @AciklamaKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -108,31 +110,41 @@ public partial class AciklamaDal : BaseDal<Aciklama>
 	
 	public virtual void Sil(Guid AciklamaKey)
 	{
-		Aciklama row = new Aciklama();
-		row.AciklamaKey = AciklamaKey;
-		base.Sil(row);
+		Aciklama satir = new Aciklama();
+		satir.AciklamaKey = AciklamaKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, Aciklama row)
+	protected override void ProcessRow(IDataReader dr, Aciklama satir)
 	{
-		row.AciklamaKey = dr.GetGuid(0);
-		row.AciklamaProperty = dr.GetString(1);
+		satir.AciklamaKey = dr.GetGuid(0);
+		satir.AciklamaProperty = dr.GetString(1);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, Aciklama row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, Aciklama satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@AciklamaKey",SqlDbType.UniqueIdentifier, row.AciklamaKey);
-		builder.parameterEkle("@Aciklama",SqlDbType.VarChar, row.AciklamaProperty,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@AciklamaKey",SqlDbType.UniqueIdentifier, satir.AciklamaKey);
+		builder.parameterEkle("@Aciklama",SqlDbType.VarChar, satir.AciklamaProperty,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	Aciklama	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	Aciklama	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@AciklamaKey",SqlDbType.UniqueIdentifier, row.AciklamaKey);
-		builder.parameterEkle("@Aciklama",SqlDbType.VarChar, row.AciklamaProperty,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@AciklamaKey",SqlDbType.UniqueIdentifier, satir.AciklamaKey);
+		builder.parameterEkle("@Aciklama",SqlDbType.VarChar, satir.AciklamaProperty,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	Aciklama	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	Aciklama	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@AciklamaKey",SqlDbType.UniqueIdentifier, row.AciklamaKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@AciklamaKey",SqlDbType.UniqueIdentifier, satir.AciklamaKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

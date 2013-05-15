@@ -22,7 +22,7 @@ namespace Karkas.Ornek.Dal.Ornekler
             string strSQL = @"SELECT *
                               FROM ORNEKLER.MUSTERI_SIPARIS
                             WHERE MusteriKey = @MusteriKey";
-            ParameterBuilder builder = new ParameterBuilder();
+            ParameterBuilder builder = Template.getParameterBuilder();
             builder.parameterEkle("@MusteriKey", DbType.Guid, pMusteriKey);
             return Template.DataTableOlustur(strSQL, builder.GetParameterArray());
         }

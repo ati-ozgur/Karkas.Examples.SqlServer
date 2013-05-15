@@ -19,7 +19,7 @@ public partial class MusteriDal : BaseDal<Musteri>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(Musteri pTypeLibrary,long pIdentityKolonValue)
@@ -43,7 +43,7 @@ public partial class MusteriDal : BaseDal<Musteri>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.MUSTERI WHERE MusteriKey = @MusteriKey";
+			return @"DELETE   FROM ORNEKLER.MUSTERI WHERE MusteriKey = @MusteriKey ";
 		}
 	}
 	protected override string UpdateString
@@ -52,9 +52,17 @@ public partial class MusteriDal : BaseDal<Musteri>
 		{
 			return @"UPDATE ORNEKLER.MUSTERI
 			 SET 
-			Adi = @Adi,Soyadi = @Soyadi,IkinciAdi = @IkinciAdi,DogumTarihi = @DogumTarihi,AktifMi = @AktifMi,Onemi = @Onemi,Kredisi = @Kredisi			
+			Adi = @Adi
+,Soyadi = @Soyadi
+,IkinciAdi = @IkinciAdi
+,DogumTarihi = @DogumTarihi
+,AktifMi = @AktifMi
+,Onemi = @Onemi
+,Kredisi = @Kredisi
+			
 			WHERE 
-			 MusteriKey = @MusteriKey ";
+			 MusteriKey = @MusteriKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -108,65 +116,75 @@ public partial class MusteriDal : BaseDal<Musteri>
 	
 	public virtual void Sil(Guid MusteriKey)
 	{
-		Musteri row = new Musteri();
-		row.MusteriKey = MusteriKey;
-		base.Sil(row);
+		Musteri satir = new Musteri();
+		satir.MusteriKey = MusteriKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, Musteri row)
+	protected override void ProcessRow(IDataReader dr, Musteri satir)
 	{
-		row.MusteriKey = dr.GetGuid(0);
-		row.Adi = dr.GetString(1);
-		row.Soyadi = dr.GetString(2);
+		satir.MusteriKey = dr.GetGuid(0);
+		satir.Adi = dr.GetString(1);
+		satir.Soyadi = dr.GetString(2);
 		if (!dr.IsDBNull(3))
 		{
-			row.IkinciAdi = dr.GetString(3);
+			satir.IkinciAdi = dr.GetString(3);
 		}
 		if (!dr.IsDBNull(4))
 		{
-			row.DogumTarihi = dr.GetDateTime(4);
+			satir.DogumTarihi = dr.GetDateTime(4);
 		}
-		row.AktifMi = dr.GetBoolean(5);
+		satir.AktifMi = dr.GetBoolean(5);
 		if (!dr.IsDBNull(6))
 		{
-			row.Onemi = dr.GetInt32(6);
+			satir.Onemi = dr.GetInt32(6);
 		}
 		if (!dr.IsDBNull(7))
 		{
-			row.Kredisi = dr.GetDecimal(7);
+			satir.Kredisi = dr.GetDecimal(7);
 		}
 		if (!dr.IsDBNull(8))
 		{
-			row.TamAdi = dr.GetString(8);
+			satir.TamAdi = dr.GetString(8);
 		}
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, Musteri row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, Musteri satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, row.MusteriKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, row.Soyadi,50);
-		builder.parameterEkle("@IkinciAdi",SqlDbType.VarChar, row.IkinciAdi,50);
-		builder.parameterEkle("@DogumTarihi",SqlDbType.DateTime, row.DogumTarihi);
-		builder.parameterEkle("@AktifMi",SqlDbType.Bit, row.AktifMi);
-		builder.parameterEkle("@Onemi",SqlDbType.Int, row.Onemi);
-		builder.parameterEkle("@Kredisi",SqlDbType.Decimal, row.Kredisi);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, satir.MusteriKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, satir.Soyadi,50);
+		builder.parameterEkle("@IkinciAdi",SqlDbType.VarChar, satir.IkinciAdi,50);
+		builder.parameterEkle("@DogumTarihi",SqlDbType.DateTime, satir.DogumTarihi);
+		builder.parameterEkle("@AktifMi",SqlDbType.Bit, satir.AktifMi);
+		builder.parameterEkle("@Onemi",SqlDbType.Int, satir.Onemi);
+		builder.parameterEkle("@Kredisi",SqlDbType.Decimal, satir.Kredisi);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	Musteri	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	Musteri	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, row.MusteriKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, row.Soyadi,50);
-		builder.parameterEkle("@IkinciAdi",SqlDbType.VarChar, row.IkinciAdi,50);
-		builder.parameterEkle("@DogumTarihi",SqlDbType.DateTime, row.DogumTarihi);
-		builder.parameterEkle("@AktifMi",SqlDbType.Bit, row.AktifMi);
-		builder.parameterEkle("@Onemi",SqlDbType.Int, row.Onemi);
-		builder.parameterEkle("@Kredisi",SqlDbType.Decimal, row.Kredisi);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, satir.MusteriKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, satir.Soyadi,50);
+		builder.parameterEkle("@IkinciAdi",SqlDbType.VarChar, satir.IkinciAdi,50);
+		builder.parameterEkle("@DogumTarihi",SqlDbType.DateTime, satir.DogumTarihi);
+		builder.parameterEkle("@AktifMi",SqlDbType.Bit, satir.AktifMi);
+		builder.parameterEkle("@Onemi",SqlDbType.Int, satir.Onemi);
+		builder.parameterEkle("@Kredisi",SqlDbType.Decimal, satir.Kredisi);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	Musteri	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	Musteri	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, row.MusteriKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@MusteriKey",SqlDbType.UniqueIdentifier, satir.MusteriKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

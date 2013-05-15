@@ -19,12 +19,11 @@ public partial class IdentityTinyIntDal : BaseDal<IdentityTinyInt>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(IdentityTinyInt pTypeLibrary,long pIdentityKolonValue)
 	{
-		pTypeLibrary.IdentityTinyIntKey = (byte )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -44,7 +43,7 @@ public partial class IdentityTinyIntDal : BaseDal<IdentityTinyInt>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.IDENTITY_TINY_INT WHERE IdentityTinyIntKey = @IdentityTinyIntKey";
+			return @"DELETE   FROM ORNEKLER.IDENTITY_TINY_INT WHERE IdentityTinyIntKey = @IdentityTinyIntKey ";
 		}
 	}
 	protected override string UpdateString
@@ -53,9 +52,11 @@ public partial class IdentityTinyIntDal : BaseDal<IdentityTinyInt>
 		{
 			return @"UPDATE ORNEKLER.IDENTITY_TINY_INT
 			 SET 
-			Adi = @Adi			
+			Adi = @Adi
+			
 			WHERE 
-			 IdentityTinyIntKey = @IdentityTinyIntKey ";
+			 IdentityTinyIntKey = @IdentityTinyIntKey
+ ";
 		}
 	}
 	protected override string InsertString
@@ -63,9 +64,9 @@ public partial class IdentityTinyIntDal : BaseDal<IdentityTinyInt>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.IDENTITY_TINY_INT 
-			 (Adi) 
+			 (IdentityTinyIntKey,Adi) 
 			 VALUES 
-						(@Adi);SELECT scope_identity();";
+						(@IdentityTinyIntKey,@Adi)";
 		}
 	}
 	public IdentityTinyInt SorgulaIdentityTinyIntKeyIle(byte p1)
@@ -86,7 +87,7 @@ public partial class IdentityTinyIntDal : BaseDal<IdentityTinyInt>
 	{
 		get
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,33 +110,44 @@ public partial class IdentityTinyIntDal : BaseDal<IdentityTinyInt>
 	
 	public virtual void Sil(byte IdentityTinyIntKey)
 	{
-		IdentityTinyInt row = new IdentityTinyInt();
-		row.IdentityTinyIntKey = IdentityTinyIntKey;
-		base.Sil(row);
+		IdentityTinyInt satir = new IdentityTinyInt();
+		satir.IdentityTinyIntKey = IdentityTinyIntKey;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, IdentityTinyInt row)
+	protected override void ProcessRow(IDataReader dr, IdentityTinyInt satir)
 	{
-		row.IdentityTinyIntKey = dr.GetByte(0);
+		satir.IdentityTinyIntKey = dr.GetByte(0);
 		if (!dr.IsDBNull(1))
 		{
-			row.Adi = dr.GetString(1);
+			satir.Adi = dr.GetString(1);
 		}
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentityTinyInt row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, IdentityTinyInt satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityTinyIntKey",SqlDbType.TinyInt, satir.IdentityTinyIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentityTinyInt	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentityTinyInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentityTinyIntKey",SqlDbType.TinyInt, row.IdentityTinyIntKey);
-		builder.parameterEkle("@Adi",SqlDbType.VarChar, row.Adi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityTinyIntKey",SqlDbType.TinyInt, satir.IdentityTinyIntKey);
+		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentityTinyInt	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IdentityTinyInt	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@IdentityTinyIntKey",SqlDbType.TinyInt, row.IdentityTinyIntKey);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@IdentityTinyIntKey",SqlDbType.TinyInt, satir.IdentityTinyIntKey);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }

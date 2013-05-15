@@ -19,7 +19,7 @@ public partial class IsimlendirmeBozukDal : BaseDal<IsimlendirmeBozuk>
 	{
 		get
 		{
-			return "KARKAS_ORNEK";
+			return "Karkas.Ornek";
 		}
 	}
 	protected override void identityKolonDegeriniSetle(IsimlendirmeBozuk pTypeLibrary,long pIdentityKolonValue)
@@ -43,7 +43,7 @@ public partial class IsimlendirmeBozukDal : BaseDal<IsimlendirmeBozuk>
 	{
 		get 
 		{
-			return @"DELETE   FROM ORNEKLER.ISIMLENDIRME_BOZUK WHERE KISI_OID = @KISI_OID";
+			return @"DELETE   FROM ORNEKLER.ISIMLENDIRME_BOZUK WHERE KISI_OID = @KISI_OID ";
 		}
 	}
 	protected override string UpdateString
@@ -52,9 +52,12 @@ public partial class IsimlendirmeBozukDal : BaseDal<IsimlendirmeBozuk>
 		{
 			return @"UPDATE ORNEKLER.ISIMLENDIRME_BOZUK
 			 SET 
-			ADI = @ADI,SOYADI = @SOYADI			
+			ADI = @ADI
+,SOYADI = @SOYADI
+			
 			WHERE 
-			 KISI_OID = @KISI_OID ";
+			 KISI_OID = @KISI_OID
+ ";
 		}
 	}
 	protected override string InsertString
@@ -67,7 +70,7 @@ public partial class IsimlendirmeBozukDal : BaseDal<IsimlendirmeBozuk>
 						(@KISI_OID,@ADI,@SOYADI)";
 		}
 	}
-	public IsimlendirmeBozuk SorgulaKISI_OIDIle(int p1)
+	public IsimlendirmeBozuk SorgulaKisiOidIle(int p1)
 	{
 		List<IsimlendirmeBozuk> liste = new List<IsimlendirmeBozuk>();
 		SorguCalistir(liste,String.Format(" KISI_OID = '{0}'", p1));		
@@ -108,34 +111,44 @@ public partial class IsimlendirmeBozukDal : BaseDal<IsimlendirmeBozuk>
 	
 	public virtual void Sil(int KisiOid)
 	{
-		IsimlendirmeBozuk row = new IsimlendirmeBozuk();
-		row.KisiOid = KisiOid;
-		base.Sil(row);
+		IsimlendirmeBozuk satir = new IsimlendirmeBozuk();
+		satir.KisiOid = KisiOid;
+		base.Sil(satir);
 	}
-	protected override void ProcessRow(IDataReader dr, IsimlendirmeBozuk row)
+	protected override void ProcessRow(IDataReader dr, IsimlendirmeBozuk satir)
 	{
-		row.KisiOid = dr.GetInt32(0);
-		row.Adi = dr.GetString(1);
-		row.Soyadi = dr.GetString(2);
+		satir.KisiOid = dr.GetInt32(0);
+		satir.Adi = dr.GetString(1);
+		satir.Soyadi = dr.GetString(2);
 	}
-	protected override void InsertCommandParametersAdd(DbCommand cmd, IsimlendirmeBozuk row)
+	protected override void InsertCommandParametersAdd(DbCommand cmd, IsimlendirmeBozuk satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@KISI_OID",SqlDbType.Int, row.KisiOid);
-		builder.parameterEkle("@ADI",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@SOYADI",SqlDbType.VarChar, row.Soyadi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@KISI_OID",SqlDbType.Int, satir.KisiOid);
+		builder.parameterEkle("@ADI",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@SOYADI",SqlDbType.VarChar, satir.Soyadi,50);
 	}
-	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IsimlendirmeBozuk	 row)
+	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IsimlendirmeBozuk	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@KISI_OID",SqlDbType.Int, row.KisiOid);
-		builder.parameterEkle("@ADI",SqlDbType.VarChar, row.Adi,50);
-		builder.parameterEkle("@SOYADI",SqlDbType.VarChar, row.Soyadi,50);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@KISI_OID",SqlDbType.Int, satir.KisiOid);
+		builder.parameterEkle("@ADI",SqlDbType.VarChar, satir.Adi,50);
+		builder.parameterEkle("@SOYADI",SqlDbType.VarChar, satir.Soyadi,50);
 	}
-	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IsimlendirmeBozuk	 row)
+	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	IsimlendirmeBozuk	 satir)
 	{
-		ParameterBuilder builder = new ParameterBuilder(cmd);
-		builder.parameterEkle("@KISI_OID",SqlDbType.Int, row.KisiOid);
+		ParameterBuilder builder = Template.getParameterBuilder();
+		builder.Command = cmd;
+		builder.parameterEkle("@KISI_OID",SqlDbType.Int, satir.KisiOid);
+	}
+	public override string DbProviderName
+	{
+		get
+		{
+			return "System.Data.SqlClient";
+		}
 	}
 }
 }
