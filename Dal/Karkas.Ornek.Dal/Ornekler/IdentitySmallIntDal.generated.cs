@@ -24,6 +24,7 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	}
 	protected override void identityKolonDegeriniSetle(IdentitySmallInt pTypeLibrary,long pIdentityKolonValue)
 	{
+		pTypeLibrary.IdentitySmallIntKey = (short )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -64,9 +65,9 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.IDENTITY_SMALL_INT 
-			 (IdentitySmallIntKey,Adi) 
+			 (Adi) 
 			 VALUES 
-						(@IdentitySmallIntKey,@Adi)";
+						(@Adi);SELECT scope_identity();";
 		}
 	}
 	public IdentitySmallInt SorgulaIdentitySmallIntKeyIle(short p1)
@@ -87,7 +88,7 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	{
 		get
 		{
-			return false;
+			return true;
 		}
 	}
 	
@@ -123,7 +124,6 @@ public partial class IdentitySmallIntDal : BaseDal<IdentitySmallInt>
 	{
 		ParameterBuilder builder = Template.getParameterBuilder();
 		builder.Command = cmd;
-		builder.parameterEkle("@IdentitySmallIntKey",SqlDbType.SmallInt, satir.IdentitySmallIntKey);
 		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 	}
 	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	IdentitySmallInt	 satir)

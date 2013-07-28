@@ -54,6 +54,8 @@
     <Compile Include="Ornekler\BasitTablo.generated.cs" />
     <Compile Include="Ornekler\BasitTabloIdentity.cs" />
     <Compile Include="Ornekler\BasitTabloIdentity.generated.cs" />
+    <Compile Include="Ornekler\ButunVeriYapilari2008r2.cs" />
+    <Compile Include="Ornekler\ButunVeriYapilari2008r2.generated.cs" />
     <Compile Include="Ornekler\ConcurrencyOrnek.cs" />
     <Compile Include="Ornekler\ConcurrencyOrnek.generated.cs" />
     <Compile Include="Ornekler\DenemeGuidIdentity.cs" />
@@ -74,6 +76,8 @@
     <Compile Include="Ornekler\MusteriSiparis.generated.cs" />
     <Compile Include="Ornekler\OrnekTablo.cs" />
     <Compile Include="Ornekler\OrnekTablo.generated.cs" />
+    <Compile Include="Ornekler\PkOlmayan.cs" />
+    <Compile Include="Ornekler\PkOlmayan.generated.cs" />
     <Compile Include="SessionEnumHelper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 	}
 	protected override void identityKolonDegeriniSetle(DenemeGuidIdentity pTypeLibrary,long pIdentityKolonValue)
 	{
+		pTypeLibrary.DenemeNo = (int )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -52,8 +53,7 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 		{
 			return @"UPDATE ORNEKLER.DENEME_GUID_IDENTITY
 			 SET 
-			DenemeNo = @DenemeNo
-,DenemeKolon = @DenemeKolon
+			DenemeKolon = @DenemeKolon
 			
 			WHERE 
 			 DenemeKey = @DenemeKey
@@ -65,9 +65,9 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.DENEME_GUID_IDENTITY 
-			 (DenemeKey,DenemeNo,DenemeKolon) 
+			 (DenemeKey,DenemeKolon) 
 			 VALUES 
-						(@DenemeKey,@DenemeNo,@DenemeKolon)";
+						(@DenemeKey,@DenemeKolon);SELECT scope_identity();";
 		}
 	}
 	public DenemeGuidIdentity SorgulaDenemeKeyIle(Guid p1)
@@ -88,7 +88,7 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 	{
 		get
 		{
-			return false;
+			return true;
 		}
 	}
 	
@@ -126,7 +126,6 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 		ParameterBuilder builder = Template.getParameterBuilder();
 		builder.Command = cmd;
 		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, satir.DenemeKey);
-		builder.parameterEkle("@DenemeNo",SqlDbType.Int, satir.DenemeNo);
 		builder.parameterEkle("@DenemeKolon",SqlDbType.VarChar, satir.DenemeKolon,50);
 	}
 	protected override void UpdateCommandParametersAdd(DbCommand cmd, 	DenemeGuidIdentity	 satir)
@@ -134,7 +133,6 @@ public partial class DenemeGuidIdentityDal : BaseDal<DenemeGuidIdentity>
 		ParameterBuilder builder = Template.getParameterBuilder();
 		builder.Command = cmd;
 		builder.parameterEkle("@DenemeKey",SqlDbType.UniqueIdentifier, satir.DenemeKey);
-		builder.parameterEkle("@DenemeNo",SqlDbType.Int, satir.DenemeNo);
 		builder.parameterEkle("@DenemeKolon",SqlDbType.VarChar, satir.DenemeKolon,50);
 	}
 	protected override void DeleteCommandParametersAdd(DbCommand cmd, 	DenemeGuidIdentity	 satir)

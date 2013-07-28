@@ -24,6 +24,7 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	}
 	protected override void identityKolonDegeriniSetle(BasitTabloIdentity pTypeLibrary,long pIdentityKolonValue)
 	{
+		pTypeLibrary.BasitTabloIdentityKey = (int )pIdentityKolonValue;
 	}
 	protected override string SelectCountString
 	{
@@ -65,9 +66,9 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 		get 
 		{
 			return @"INSERT INTO ORNEKLER.BASIT_TABLO_IDENTITY 
-			 (BasitTabloIdentityKey,Adi,Soyadi) 
+			 (Adi,Soyadi) 
 			 VALUES 
-						(@BasitTabloIdentityKey,@Adi,@Soyadi)";
+						(@Adi,@Soyadi);SELECT scope_identity();";
 		}
 	}
 	public BasitTabloIdentity SorgulaBasitTabloIdentityKeyIle(int p1)
@@ -88,7 +89,7 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	{
 		get
 		{
-			return false;
+			return true;
 		}
 	}
 	
@@ -125,7 +126,6 @@ public partial class BasitTabloIdentityDal : BaseDal<BasitTabloIdentity>
 	{
 		ParameterBuilder builder = Template.getParameterBuilder();
 		builder.Command = cmd;
-		builder.parameterEkle("@BasitTabloIdentityKey",SqlDbType.Int, satir.BasitTabloIdentityKey);
 		builder.parameterEkle("@Adi",SqlDbType.VarChar, satir.Adi,50);
 		builder.parameterEkle("@Soyadi",SqlDbType.VarChar, satir.Soyadi,50);
 	}
