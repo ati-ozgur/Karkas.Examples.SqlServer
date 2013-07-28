@@ -1,7 +1,7 @@
 USE [KARKAS_ORNEK]
 GO
 
-/****** Object:  Table [ORNEKLER].[BUTUN_VERI_YAPILARI_2008R2]    Script Date: 07/28/2013 23:30:48 ******/
+/****** Object:  Table [ORNEKLER].[BUTUN_VERI_YAPILARI_2008R2]    Script Date: 07/29/2013 00:08:35 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,6 +12,7 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [ORNEKLER].[BUTUN_VERI_YAPILARI_2008R2](
+	[ButunVeriYapilari2008R2Key] [int] IDENTITY(1,1) NOT NULL,
 	[BigIntColumn] [bigint] NULL,
 	[BinaryColumn] [binary](50) NULL,
 	[BitColumn] [bit] NULL,
@@ -47,7 +48,11 @@ CREATE TABLE [ORNEKLER].[BUTUN_VERI_YAPILARI_2008R2](
 	[VarBinaryMaxColumn] [varbinary](max) NULL,
 	[VarCharColumn] [varchar](50) NULL,
 	[VarCharMaxColumn] [varchar](max) NULL,
-	[XmlColumn] [xml] NULL
+	[XmlColumn] [xml] NULL,
+ CONSTRAINT [PK_BUTUN_VERI_YAPILARI_2008R2] PRIMARY KEY CLUSTERED 
+(
+	[ButunVeriYapilari2008R2Key] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
