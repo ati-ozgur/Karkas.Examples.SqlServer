@@ -13,22 +13,23 @@ using System.ComponentModel.DataAnnotations;
 namespace Karkas.Ornek.TypeLibrary.Ornekler
 {
 	[Serializable]
-	[DebuggerDisplay("")]
+	[DebuggerDisplay("ButunVeriYapilari2008r2key = {ButunVeriYapilari2008r2key}")]
 	public partial class 	ButunVeriYapilari2008r2: BaseTypeLibrary
 	{
+		private int butunVeriYapilari2008r2key;
 		private Nullable<long> bigIntColumn;
 		private byte[] binaryColumn;
 		private Nullable<bool> bitColumn;
 		private string charColumn;
-		private Unknown dateColumn;
+		private Nullable<DateTime> dateColumn;
 		private Nullable<DateTime> dateTimeColumn;
-		private Unknown dateTime2column;
-		private Unknown dateTimeOffsetColumn;
+		private Nullable<DateTime> dateTime2column;
+		private DateTimeOffset dateTimeOffsetColumn;
 		private Nullable<decimal> decimalColumn;
 		private Nullable<double> floatColumn;
-		private Unknown geopgraphyColummn;
-		private Unknown geometryColumn;
-		private Unknown hierarchyIdColumn;
+		private SqlGeography geopgraphyColummn;
+		private SqlGeometry geometryColumn;
+		private SqlHierarchyId hierarchyIdColumn;
 		private byte[] imageColumn;
 		private Nullable<int> intColumn;
 		private Nullable<decimal> moneyColumn;
@@ -43,7 +44,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private Nullable<decimal> smallMoneyColumn;
 		private object sqlVariantColumn;
 		private string textColumn;
-		private Unknown timeColumn;
+		private Nullable<TimeSpan> timeColumn;
 		private byte[] timestampColumn;
 		private Nullable<byte> tinyIntColumn;
 		private Nullable<Guid> uniqueIdentifierColumn;
@@ -52,6 +53,26 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		private string varCharColumn;
 		private string varCharMaxColumn;
 		private string xmlColumn;
+
+		[Key]
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		public int ButunVeriYapilari2008r2key
+		{
+			[DebuggerStepThrough]
+			get
+			{
+				return butunVeriYapilari2008r2key;
+			}
+			[DebuggerStepThrough]
+			set
+			{
+				if ((this.RowState == DataRowState.Unchanged) && (butunVeriYapilari2008r2key!= value))
+				{
+					this.RowState = DataRowState.Modified;
+				}
+				butunVeriYapilari2008r2key = value;
+			}
+		}
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -136,7 +157,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown DateColumn
+		public Nullable<DateTime> DateColumn
 		{
 			[DebuggerStepThrough]
 			get
@@ -176,7 +197,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown DateTime2column
+		public Nullable<DateTime> DateTime2column
 		{
 			[DebuggerStepThrough]
 			get
@@ -196,7 +217,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown DateTimeOffsetColumn
+		public DateTimeOffset DateTimeOffsetColumn
 		{
 			[DebuggerStepThrough]
 			get
@@ -254,7 +275,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown GeopgraphyColummn
+		public SqlGeography GeopgraphyColummn
 		{
 			[DebuggerStepThrough]
 			get
@@ -274,7 +295,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown GeometryColumn
+		public SqlGeometry GeometryColumn
 		{
 			[DebuggerStepThrough]
 			get
@@ -294,7 +315,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown HierarchyIdColumn
+		public SqlHierarchyId HierarchyIdColumn
 		{
 			[DebuggerStepThrough]
 			get
@@ -593,7 +614,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 
 		[Required]
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		public Unknown TimeColumn
+		public Nullable<TimeSpan> TimeColumn
 		{
 			[DebuggerStepThrough]
 			get
@@ -775,6 +796,31 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		[XmlIgnore, SoapIgnore]
 		[ScaffoldColumn(false)]
+		public string ButunVeriYapilari2008r2keyAsString
+		{
+			[DebuggerStepThrough]
+			get
+			{
+				 return butunVeriYapilari2008r2key.ToString(); 
+			}
+			[DebuggerStepThrough]
+			set
+			{
+				try
+				{
+					int _a = Convert.ToInt32(value);
+				ButunVeriYapilari2008r2key = _a;
+				}
+				catch(Exception)
+				{
+					this.Onaylayici.OnaylayiciListesi.Add(new DaimaBasarisiz(this,"ButunVeriYapilari2008r2key",string.Format(CEVIRI_YAZISI,"ButunVeriYapilari2008r2key","int")));
+				}
+			}
+		}
+
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		[XmlIgnore, SoapIgnore]
+		[ScaffoldColumn(false)]
 		public string BigIntColumnAsString
 		{
 			[DebuggerStepThrough]
@@ -852,7 +898,15 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			[DebuggerStepThrough]
 			set
 			{
-				throw new ArgumentException("string'ten degisken tipine cevirim desteklenmemektedir");
+				try
+				{
+					DateTime _a = Convert.ToDateTime(value);
+				DateColumn = _a;
+				}
+				catch(Exception)
+				{
+					this.Onaylayici.OnaylayiciListesi.Add(new DaimaBasarisiz(this,"DateColumn",string.Format(CEVIRI_YAZISI,"DateColumn","DateTime")));
+				}
 			}
 		}
 
@@ -894,7 +948,15 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 			[DebuggerStepThrough]
 			set
 			{
-				throw new ArgumentException("string'ten degisken tipine cevirim desteklenmemektedir");
+				try
+				{
+					DateTime _a = Convert.ToDateTime(value);
+				DateTime2column = _a;
+				}
+				catch(Exception)
+				{
+					this.Onaylayici.OnaylayiciListesi.Add(new DaimaBasarisiz(this,"DateTime2column",string.Format(CEVIRI_YAZISI,"DateTime2column","DateTime")));
+				}
 			}
 		}
 
@@ -1354,6 +1416,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		public ButunVeriYapilari2008r2 ShallowCopy()
 		{
 			ButunVeriYapilari2008r2 obj = new ButunVeriYapilari2008r2();
+			obj.butunVeriYapilari2008r2key = butunVeriYapilari2008r2key;
 			obj.bigIntColumn = bigIntColumn;
 			obj.binaryColumn = binaryColumn;
 			obj.bitColumn = bitColumn;
@@ -1398,6 +1461,7 @@ namespace Karkas.Ornek.TypeLibrary.Ornekler
 		}
 		public class PropertyIsimleri
 		{
+			public const string ButunVeriYapilari2008r2key = "ButunVeriYapilari2008R2Key";
 			public const string BigIntColumn = "BigIntColumn";
 			public const string BinaryColumn = "BinaryColumn";
 			public const string BitColumn = "BitColumn";
